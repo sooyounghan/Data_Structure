@@ -105,27 +105,577 @@
   - 삭제할 노드가 이전 노드(NodeB)와 연결이 끊어지면 자연스럽게 JVM의 Garabage Collector의 Scheduling에 의해 메모리에서 제거
 
 -----
-###
+### 단일 연결리스트(Singly Linked List) 구현
 -----
-<div align = "center">
-<img 
-</div>
+```java
+public class Node {
+	Node next; // 다음 노드의 참조값을 가리킴
+	Object data; // 현재 노드의 데이터
+}
+```
+
+```java
+public class SinglyLinkedList {
+	Node head; // head 
+	int size = 0;
+	
+	private Node findNode(int searchIndex) {
+		/* 
+		 * searchIndex에 해당하는 Node를 찾는 메서드
+		 */
+		/*
+		 * 찾는 노드의 index가 음수이거나 노드의 개수보다 많거나 같으면
+		 * 예외를 발생
+		 */
+		if(searchIndex < 0 || size <= searchIndex) {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		
+		int nodeIndex = 0;
+		Node pointer = head; // pointer는 head를 가리킴
+		
+		/*
+		 * 찾은 노드의 index와 노드의 순서가 동일할 때까지,
+		 * 노드의 참조값을 이용해 이동
+		 */
+		while(nodeIndex != searchIndex) {
+			++nodeIndex;
+			pointer = pointer.next; // 다음 노드로 이동
+		}
+		
+		return pointer;
+	}
+	
+	public Object getData(int searchIndex) {
+		/*
+		 * searchIndex에 해당하는 노드의 데이터를 반환하는 메서드
+		 */
+		return findNode(searchIndex).data;
+	}
+
+	public boolean isEmpty() {
+		/*
+		 * 노드가 비어있는지 확인하는 메서드
+		 */
+		return (size == 0);
+	}
+	
+	public int size() {
+		/*
+		 * 노드의 개수를 반환하는 메서드
+		 */
+		return size;
+	}
+	
+	public void addLast(Object data) {
+		/* 
+		 * 마지막 노드에 노드를 추가하는 메서드
+		 */
+		add(size, data);
+	}
+	
+	public void addFirst(Object data) {
+		/*
+		 * 첫 번째 노드로 추가하는 메서드
+		 */
+		add(0, data);
+	}
+	
+	public void removeLast() {
+		/* 
+		 * 마지막 노드를 삭제하는 메서드
+		 */
+		remove(size - 1);
+	}
+	
+	public void removeFirst() {
+		/*
+		 * 첫번쨰 노드를 삭제하는 메서드
+		 */
+		remove(0);
+	}
+	
+	public void add(int index, Object data) {
+		/*
+		 * 노드의 순서를 기준으로 해당 index에 data를 삽입
+		 */
+		
+		Node node = new Node(); // 추가하려는 새로운 노드
+		node.data = data; 
+		if(index == 0) {
+			/*
+			 * 맨 앞에 노드를 삽입하는 경우
+			 */
+			node.next = head; // 노드의 다음값은 본래 head의 다음 참조값
+			head = node; // head의 다음 노드 참조값은 추가되는 노드의 참조값
+		}
+		else {
+			/*
+			 * 해당 index에 삽입하는 경우
+			 * 이전 노드를 먼저 찾아야함
+			 */
+			Node prevNode = findNode(index - 1); // 이전 노드 찾기
+			node.next = prevNode.next; // 삽입되는 노드의 다음 참조값 주소는 이전 노드의 다음값 주소
+			prevNode.next = node; // 이전 노드의 다음 참조값은 현재 삽입되는 참조값으로 갱신
+		}
+		++size;
+	}
+	
+	public void remove(int index) {
+		/*
+		 * 해당 index에 해당하는 Node를 삭제
+		 */
+		
+		if(index == 0 && head != null) {
+			/*
+			 * 맨 앞의 노드를 삭제
+			 */
+			head = head.next; // head의 다음 참조값은 head 다음의 노드의 다음 참조값
+		}
+		else {
+			/*
+			 * 해당 index의 노드를 삭제하려는 경우
+			 */
+			Node prevNode = findNode(index - 1); // 이전 노드 찾기
+			prevNode.next = prevNode.next.next; // 이전 노드의 참조값은 다음노드의 참조값으로 갱신
+		}
+		--size;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Node pointer = head;
+		
+		sb.append("head").append(" -> ");
+		while(pointer != null) {
+			sb.append(pointer.data).append(" -> ");
+			pointer = pointer.next; // pointer는 null아닐때까지 계속 다음 노드로 이동
+		}
+		
+		sb.append("null");
+		
+		return sb.toString();
+	}
+}
+```
+
+```java
+public class Main {
+	public static void main(String[] args) {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addLast("B");
+        System.out.println(list);
+
+        list.addFirst("A");
+        System.out.println(list);
+
+        list.addLast("E");
+        System.out.println(list);
+
+        list.add(1, "C");
+        System.out.println(list);
+
+        list.add(2, "D");
+        System.out.println(list);
+
+        list.removeLast();
+        System.out.println(list);
+
+        list.remove(1);
+        System.out.println(list);
+
+        list.removeFirst();
+        System.out.println(list);
+
+        System.out.printf("노드의 개수:%d\n", list.size());
+
+        System.out.printf("1번 인덱스의 값:%s", list.getData(1));
+	}
+}
+```
+
+-----
+### 단일 연결리스트(Singly Linked List) 발전사항
+-----
+1. 데이터 저장 후에 리스트는 어떤 자료형을 저장했는지 알 수 없음 (Object로 저장하는 구조로 생성)
+2. 이질적인 데이터 저장 후 데이터를 산출할 때 데이터 형 변환 코드의 잘못 발생하면, 예외발생 (ClassCastException)
+
+```java
+SinglyLinkedList list = new SinglyLinkedList();
+
+list.addLast("안녕"); // String
+list.addLast(1); // Integer
+list.addLast(true); // Boolean
+…
+
+Integer data = (Integer) list.getData(0); // Integer = (Integer)String
+// ClassCastException 발생
+```   
+
+3. 해결방안 : Generic
+```java
+public class Node<E> { // Generic 사용
+	Node<E> next; // 다음 노드의 참조값을 가리킴
+	E data; // 현재 노드의 데이터
+}
+```
+
+```java
+public class SinglyLinkedList<T> {
+	Node<T> head; // head 
+	int size = 0;
+	
+	private Node<T> findNode(int searchIndex) {
+		/* 
+		 * searchIndex에 해당하는 Node를 찾는 메서드
+		 */
+		/*
+		 * 찾는 노드의 index가 음수이거나 노드의 개수보다 많거나 같으면
+		 * 예외를 발생
+		 */
+		if(searchIndex < 0 || size <= searchIndex) {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		
+		int nodeIndex = 0;
+		Node<T> pointer = head; // pointer는 head를 가리킴
+		
+		/*
+		 * 찾은 노드의 index와 노드의 순서가 동일할 때까지,
+		 * 노드의 참조값을 이용해 이동
+		 */
+		while(nodeIndex != searchIndex) {
+			++nodeIndex;
+			pointer = pointer.next; // 다음 노드로 이동
+		}
+		
+		return pointer;
+	}
+	
+	public T getData(int searchIndex) {
+		/*
+		 * searchIndex에 해당하는 노드의 데이터를 반환하는 메서드
+		 */
+		return findNode(searchIndex).data;
+	}
+
+	public boolean isEmpty() {
+		/*
+		 * 노드가 비어있는지 확인하는 메서드
+		 */
+		return (size == 0);
+	}
+	
+	public int size() {
+		/*
+		 * 노드의 개수를 반환하는 메서드
+		 */
+		return size;
+	}
+	
+	public void addLast(T data) {
+		/* 
+		 * 마지막 노드에 노드를 추가하는 메서드
+		 */
+		add(size, data);
+	}
+	
+	public void addFirst(T data) {
+		/*
+		 * 첫 번째 노드로 추가하는 메서드
+		 */
+		add(0, data);
+	}
+	
+	public void removeLast() {
+		/* 
+		 * 마지막 노드를 삭제하는 메서드
+		 */
+		remove(size - 1);
+	}
+	
+	public void removeFirst() {
+		/*
+		 * 첫번쨰 노드를 삭제하는 메서드
+		 */
+		remove(0);
+	}
+	
+	public void add(int index, T data) {
+		/*
+		 * 노드의 순서를 기준으로 해당 index에 data를 삽입
+		 */
+		
+		Node<T> node = new Node(); // 추가하려는 새로운 노드
+		node.data = data; 
+		if(index == 0) {
+			/*
+			 * 맨 앞에 노드를 삽입하는 경우
+			 */
+			node.next = head; // 노드의 다음값은 본래 head의 다음 참조값
+			head = node; // head의 다음 노드 참조값은 추가되는 노드의 참조값
+		}
+		else {
+			/*
+			 * 해당 index에 삽입하는 경우
+			 * 이전 노드를 먼저 찾아야함
+			 */
+			Node<T> prevNode = findNode(index - 1); // 이전 노드 찾기
+			node.next = prevNode.next; // 삽입되는 노드의 다음 참조값 주소는 이전 노드의 다음값 주소
+			prevNode.next = node; // 이전 노드의 다음 참조값은 현재 삽입되는 참조값으로 갱신
+		}
+		++size;
+	}
+	
+	public void remove(int index) {
+		/*
+		 * 해당 index에 해당하는 Node를 삭제
+		 */
+		
+		if(index == 0 && head != null) {
+			/*
+			 * 맨 앞의 노드를 삭제
+			 */
+			head = head.next; // head의 다음 참조값은 head 다음의 노드의 다음 참조값
+		}
+		else {
+			/*
+			 * 해당 index의 노드를 삭제하려는 경우
+			 */
+			Node<T> prevNode = findNode(index - 1); // 이전 노드 찾기
+			prevNode.next = prevNode.next.next; // 이전 노드의 참조값은 다음노드의 참조값으로 갱신
+		}
+		--size;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Node<T> pointer = head;
+		
+		sb.append("head").append(" -> ");
+		while(pointer != null) {
+			sb.append(pointer.data).append(" -> ");
+			pointer = pointer.next; // pointer는 null아닐때까지 계속 다음 노드로 이동
+		}
+		
+		sb.append("null");
+		
+		return sb.toString();
+	}
+}
+```
+
+```java
+        //  제네릭 적용 단일 연결 리스트 (String으로 지정)
+        GenericSinglyLinkedList<String> list = new GenericSinglyLinkedList<>();
+
+        list.addLast("A");
+        System.out.println(list);
+
+        list.addLast("B");
+        System.out.println(list);
+
+        list.addLast("C");
+        System.out.println(list);
+
+        list.addLast("D");
+        System.out.println(list);
+
+        //incompatible type 컴파일 에러가 발생
+        //list.addLast(1);
+```
+
+
+-----
+### 다른 방식의 단일 연결 리스트
+-----
+1. head는 단순히 첫 번째 참조값을 저장하는 변수 -> 데이터가 존재하지 않는 Node로 제작 가능
 
 <div align = "center">
-<img 
-</div>
+<img width="640" alt="1" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/1aaa1fa7-d9bc-4577-ba58-3e28b97ad583">
+</div>   
+       
+      * head 노드를 -1번째라고 가정
+      * 맨 앞에 노드를 추가하거나 삭제할 때 주의가 필요   
+      
+   
+2. 맨 앞에 노드를 추가할 때
 
------
-###
------
 <div align = "center">
-<img 
-</div>
+<img width="640" alt="2" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/948a8a73-fd95-4a66-b08c-41e027edbe4e">
+</div>    
 
+ : 기존에는 head에 새로운 노드의 참조값을 저장했으나, head node의 다음 노드 참조값을 저장해야함
+
+    
+3. 맨 앞의 노드를 삭제할 때
 <div align = "center">
-<img 
-</div>
+<img width="640" alt="3" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/c3bcf813-863f-4464-a730-de83dd4ec847">
+</div>   
 
------
-###
------
+ : 기존에는 head에 삭제할 노드의 다음 노드의 참조값을 저장했으나, head node의 다음 노드의 참조값으로 삭제할 다음 노드의 참조값을 저장해야함
+
+```java
+public class HeadNodeSinglyLinkedList {
+	/*
+	 * HeadNode가 존재하는 단일 연결 리스트 
+	 * : 데이터가 존재하는 노드가 index = 0
+	 */
+	Node head = new Node(); // head도 노드로 존재 (데이터는 없으며, 참조값만 존재)
+	int size = 0;
+	
+	private Node findNode(int searchIndex) {
+		/* 
+		 * searchIndex에 해당하는 Node를 찾는 메서드
+		 */
+		/*
+		 * 찾는 노드의 index가 -1보다이거나 노드의 개수보다 많거나 같으면
+		 * 예외를 발생
+		 */
+		if(searchIndex < -1 || size <= searchIndex) {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		
+		int nodeIndex = -1; // node의 index는 head node를 포함해야하므로 -1부터 시작
+		Node pointer = head; // pointer는 head를 가리킴
+		
+		/*
+		 * 찾은 노드의 index와 노드의 순서가 동일할 때까지,
+		 * 노드의 참조값을 이용해 이동
+		 */
+		while(nodeIndex != searchIndex) {
+			++nodeIndex;
+			pointer = pointer.next; // 다음 노드로 이동
+		}
+		
+		return pointer;
+	}
+	
+	public Object getData(int searchIndex) {
+		/*
+		 * searchIndex에 해당하는 노드의 데이터를 반환하는 메서드
+		 */
+		return findNode(searchIndex).data;
+	}
+
+	public boolean isEmpty() {
+		/*
+		 * 노드가 비어있는지 확인하는 메서드
+		 */
+		return (size == 0);
+	}
+	
+	public int size() {
+		/*
+		 * 노드의 개수를 반환하는 메서드
+		 */
+		return size;
+	}
+	
+	public void addLast(Object data) {
+		/* 
+		 * 마지막 노드에 노드를 추가하는 메서드
+		 */
+		add(size, data);
+	}
+	
+	public void addFirst(Object data) {
+		/*
+		 * 첫 번째 노드로 추가하는 메서드
+		 */
+		add(0, data);
+	}
+	
+	public void removeLast() {
+		/* 
+		 * 마지막 노드를 삭제하는 메서드
+		 */
+		remove(size - 1);
+	}
+	
+	public void removeFirst() {
+		/*
+		 * 첫번쨰 노드를 삭제하는 메서드
+		 */
+		remove(0);
+	}
+	
+	public void add(int index, Object data) {
+		/*
+		 * 노드의 순서를 기준으로 해당 index에 data를 삽입
+		 */
+		
+		Node node = new Node(); // 추가하려는 새로운 노드
+		node.data = data; 
+		
+		/*
+		 * HeadNode가 존재하므로 구분하지 않아도 가능
+		 */
+		Node prevNode = findNode(index - 1); // 이전 노드 찾기
+		node.next = prevNode.next; // 삽입되는 노드의 다음 참조값 주소는 이전 노드의 다음값 주소
+		prevNode.next = node; // 이전 노드의 다음 참조값은 현재 삽입되는 참조값으로 갱신
+		++size;
+	}
+	
+	public void remove(int index) {
+		/*
+		 * 해당 index에 해당하는 Node를 삭제
+		 */
+		/*
+		 * HeadNode가 존재하므로 구분하지 않아도 가능
+		 */
+		Node prevNode = findNode(index - 1); // 이전 노드 찾기
+		prevNode.next = prevNode.next.next; // 이전 노드의 참조값은 다음노드의 참조값으로 갱신
+		--size;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Node pointer = head.next;
+		
+		sb.append("head").append(" -> ");
+		while(pointer != null) {
+			sb.append(pointer.data).append(" -> ");
+			pointer = pointer.next; // pointer는 null아닐때까지 계속 다음 노드로 이동
+		}
+		
+		sb.append("null");
+		
+		return sb.toString();
+	}
+}
+```
+```java
+    // Head Node 있는 단일 연결 리스트
+        HeadNodeSinglyLinkedList headNodeList = new HeadNodeSinglyLinkedList();
+        headNodeList.addLast("B");
+        System.out.println(headNodeList);
+
+        headNodeList.addFirst("A");
+        System.out.println(headNodeList);
+
+        headNodeList.addLast("E");
+        System.out.println(headNodeList);
+
+        headNodeList.add(1, "C");
+        System.out.println(headNodeList);
+
+        headNodeList.add(2, "D");
+        System.out.println(headNodeList);
+
+        headNodeList.removeLast();
+        System.out.println(headNodeList);
+
+        headNodeList.remove(1);
+        System.out.println(headNodeList);
+
+        headNodeList.removeFirst();
+        System.out.println(headNodeList);
+
+        System.out.printf("노드의 개수:%d\n", headNodeList.size());
+
+        System.out.printf("1번 인덱스의 값:%s", headNodeList.getData(1));
+```

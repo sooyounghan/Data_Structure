@@ -112,7 +112,7 @@ h(key, i) = (h'(key) + (c1 * i) + (c2 * i^2)) mod m
 5. Linear Probing 방식보다 좀 더 가벼운 군집 문제 발생
 
 ------
-### Quadratic-Probing
+### Dobule Hashing
 ------
 <div align = "center">
 <img width="1097" alt="5" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/36898a5e-b614-41e1-a752-a973ac44e9d1">

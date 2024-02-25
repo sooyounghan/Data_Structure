@@ -123,6 +123,11 @@
 -----  
 ### Binary Heap 구현
 -----
+<div align = "center">
+<img width="399" alt="1" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/2737e117-7ce0-4a61-8302-ff94627444aa">
+</div>
+: 최초 시작 인덱스 기준에 따라 index 계산식이 달라짐
+
 < MaxHeap : 값이 클 수록 우선순위가 큰 Heap >
 ```java
 package Heap;
@@ -138,7 +143,17 @@ public class MaxHeap {
 	public MaxHeap() { // MaxHeap 생성자
 		this.queue = new int[4]; // 생성자를 통해 크기가 4인 정수 배열 생성
 	}
-	
+
+	public int peek() {
+	/*
+	 * 가장 맨 앞의 원소를 출력하는 메서드
+	 */
+		if (isEmpty()) { // 비어있다면, 예외 발생
+		    throw new ArrayIndexOutOfBoundsException("Heap is Empty");
+		}
+		return queue[0]; // 아니라면, 가장 맨 앞의 원소 출력
+	}
+    
 	public void add(int data) {
 		/*
 		 * Heap에 data를 추가하고자 하는 메서드
@@ -323,7 +338,17 @@ public class MinHeap {
 	public MinHeap() { // MaxHeap 생성자
 		this.queue = new int[4]; // 생성자를 통해 크기가 4인 정수 배열 생성
 	}
-	
+
+	public int peek() {
+	/*
+	 * 가장 맨 앞의 원소를 출력하는 메서드
+	 */
+		if (isEmpty()) { // 비어있다면, 예외 발생
+		    throw new ArrayIndexOutOfBoundsException("Heap is Empty");
+		}
+		return queue[0]; // 아니라면, 가장 맨 앞의 원소 출력
+	}
+
 	public void add(int data) {
 		/*
 		 * Heap에 data를 추가하고자 하는 메서드

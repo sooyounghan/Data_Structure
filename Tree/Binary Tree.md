@@ -205,7 +205,7 @@ public class Tree_Main {
 ```
 
 -----
-### 순회 (Traversal)
+### 이진 트리 순회 (Traversal) - DFS
 -----
 
 <div align = "center">
@@ -648,5 +648,135 @@ public class Tree_Main {
     }
 }
 ```
+-----
+### 이진 트리 순회 (Traversal) - BFS
+-----
+<div align = "center">
+<img width="640" alt="1" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/718e2c7c-5681-4ad3-99f0-58a646f910ff">
+</div>
 
+: 트리의 상위 레벨부터 하위 레벨까지 순차적으로 탐색 (레벨 순회)
 
+-----
+### 레벨 순회
+-----   
+
+<div align = "center">
+<img width="640" alt="2" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/01d79742-051d-4856-b203-99b184c15df5">
+</div>   
+
+1. 레벨 순회는 큐를 이용하여 순회 (단순 이진 트리에서는 데이터를 삽입한 순서대로 순회 가능)
+2. <레벨 순회 방법>
+
+       1. 루트 노드를 큐에 삽입
+       2. 큐에 있는 노드를 꺼내 방문
+       3. 노드의 좌측 자식 노드를 큐에 삽입
+       4. 노드의 우측 자식 노드를 큐에 삽입
+       5. 큐가 비어 있을 때 까지 2번 부터 반복
+
+-----
+### 레벨 순회 순서
+-----   
+<div align = "center">
+<img width="640" alt="3" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/70c45de6-9205-4e3e-9eb8-1fcf84a9f7ec">
+</div>   
+
+1. 트리의 순회 시작 루트 노드부터 시작하며, 큐에 루트 노드를 삽입 후 순회가 시작
+
+   
+<div align = "center">
+<img width="640" alt="4" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/369613f6-787f-4544-9537-82401a130083">
+</div>   
+
+2. 큐에서 노드(A)를 꺼내 방문 후, 해당 노드의 좌측 자식 노드(B)와 우측 자식 노드(C)를 큐에 삽입
+
+<div align = "center">
+<img width="640" alt="5" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/24ad077c-48d9-4629-b7f5-7fe4cedcbeab">
+</div>   
+
+3. 큐에서 노드(B)를 꺼내 방문 후, 해당 노드의 좌측 자식 노드 (D)와 우측 자식 노드 (E)를 큐에 삽입
+
+<div align = "center">
+<img width="640" alt="6" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/bceb55dc-d1a3-4a99-a423-7b52fbcf2251">
+</div>   
+
+4. 큐에서 노드(C)를 꺼내 방문 후, 해당 노드의 좌측 자식 노드(F)와 우측 자식 노드(G)를 큐에 삽입
+
+<div align = "center">
+<img width="640" alt="7" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/142f49ca-adc0-49dd-889c-e684f496aa5f">
+</div>   
+
+5. 큐에서 노드(D)를 꺼내 방문 후, 해당 노드의 좌측 / 우측 자식 노드를 큐에 삽입하려고 하나 존재하지 않으므로 넘어감
+ 
+<div align = "center">
+<img width="640" alt="8" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/7e003262-982d-49d1-a657-7d22f92c318f">
+</div>   
+
+6. 큐에서 노드(E)를 꺼낸 후, 해당 노드의 좌측 / 우측 자식 노드를 큐에 삽입하려고 하나 존재하지 않으므로 넘어감
+
+<div align = "center">
+<img width="640" alt="9" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/b2cce316-5f97-44b6-88f4-580d64c36e6e">
+</div>   
+
+7. 큐에서 노드 (F)를 꺼내 방문 후, 해당 노드의 좌측 / 우측 자식 노드를 큐에 삽입하려고 하나 존재하지 않으므로 넘어감
+
+<div align = "center">
+<img width="640" alt="10" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/685019ed-136a-4c23-9900-68db8dcbec6f">
+</div>   
+
+8. 큐에서 노드(G)를 꺼내 방문 후, 해당 노드의 좌측 / 우측 자식 노드를 큐에 삽입하려고 하나 존재하지 않으므로 넘어감  
+
+<div align = "center">
+<img width="640" alt="11" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/f9874ae8-5d18-4ba9-9ac8-1c1816ca11c4">
+</div>   
+
+9. 큐에서 꺼낼 노드가 없으므로 레벨 순회는 종료됨
+
+```java
+	public void visit(Node node) {
+		/*
+		 * 노드를 방문할 때 출력하는 메서드
+		 */
+		System.out.print(node.key + " ");
+	}
+	
+	public void levelOrder() {
+		/*
+		 * 순회하는 메서드
+		 */
+		
+		if(root == null) {
+			/*
+			 * Root Node가 null이면,
+			 */
+			return; // 메서드 종료
+		}
+		
+		Queue<Node> queue = new LinkedList<>(); // 순회를 위해 이를 구현하기 위해 큐를 구현한 연결리스트 생성
+		queue.offer(root); // Root Node부터 순회할 것이므로 큐에 삽입
+		
+		while(!queue.isEmpty()) {
+			/*
+			 * 큐가 비어있지 않을 때까지 반복
+			 */
+			Node parentNode = queue.poll(); // 큐에서 삽입한 노드를 꺼냄
+			
+			visit(parentNode); // 해당 노드에 대한 키 값 출력
+			
+			if(parentNode.left != null) {
+				/*
+				 * 부모 노드 역할을 하는 노드의 좌측 노드가 null이 아니면,
+				 */
+				queue.offer(parentNode.left); // 순회를 시작할 것이며, 좌측 노드부터 순회
+			}
+			
+			if(parentNode.right != null) {
+				/*
+				 * 부모 노드의 역할을 하는 노드의 우측 노드가 null이 아니면,
+				 */
+				queue.offer(parentNode.right); // 좌측 노드를 넣었으므로, 우측 노드를 넣음
+			}
+		}
+		System.out.println();
+	}
+```

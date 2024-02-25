@@ -234,3 +234,179 @@ public class Combination {
 }
 ```
 
+-----
+### 재귀 - 백트래킹(Back Tracking)
+-----  
+1. 퇴각 검색
+2. 재귀 호출 시, Stack Frame에 쌓이고 Pop 되는 스택의 특징을 이용 → 탐색 가능한 이전 경우로 돌아가서 다시 탐색
+3. 조건이 만족하는 한 모든 경우의 수를 탐색
+
+-----
+### 백트래킹(Back Tracking) - 미로 탈출
+-----  
+
+<div align = "center">
+<img src = "https://github.com/sooyounghan/Data-Structure/assets/34672301/d83d3129-d05f-493d-b97d-b15871880fa0">
+</div>  
+
+1. 구성   
+   - 미로를 구성하는 배열은 0과 1의 값으로 저장
+   - 1은 메이즈 헌터가 지나갈 수 없는 벽, 0은 지나갈 수 있는 길
+   - 미로에는 입구와 출구가 있으며, 입구에서부터 시작해 출구로 찾아 나서면 끝
+
+2. 메이즈 헌터의 중단 조건
+   - 벽이 존재하는 곳에 이동할 수 없음
+   - 미로를 넘어서 이동할 수 없음
+   - 방문했던 곳으로 가지 않음
+
+3. 좌로 이동 (중단 조건)
+<div align = "center">
+<img width="640" alt="2" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/4cc41d68-bea4-4134-99f6-73d9c69fabb4">
+</div>  
+
+4. 우로 이동 (중단 조건)
+<div align = "center">
+<img width="640" alt="3" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/b83c2a80-0e1f-4432-af42-ee7b627dcaf3">
+</div>  
+
+5. 위로 이동 (중단 조건)
+<div align = "center">
+<img width="640" alt="4" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/d05a20d0-6ef4-4de7-a894-03a47280a7b1">
+</div>  
+
+6. 아래로 이동 (중단 조건)
+<div align = "center">
+<img width="640" alt="5" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/495cc518-8893-47c8-9b49-eb37ae5a197d">
+</div>  
+
+7. 미로 찾기
+<div align = "center">
+<img width="640" alt="6" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/b320b5f5-0ff0-4b69-a439-a28120e5ded2">
+</div>  
+
+    1. move 메서드의 재귀적 호출을 통해 Stack Frame에 쌓아 나가는 방식으로 이동
+    2. 우로 이동하는 메서드가 계속 호출되다가 이동할 수 없는 상황
+    3. 해당 메서드는 중단하며, 이전 메서드의 실행 흐름으로 돌아가 그 다음 구문인 아래로 이동하는 메서드 호출
+    4. 아래로 이동할 수 없는 상황이 오면, 이전 메서드의 실행 흐름으로 돌아가 좌로 이동하는 메서드를 호출
+    5. 이렇게 우, 아래, 좌, 위 이동 메서드를 호출하면서 중단 조건을 만나면 이전 실행 흐름 부터 시작
+     → 백트래킹(BackTraking)
+
+< 중단 조건 >   
+   A. 출구를 찾음   
+   B. 또는 이동할 수 없는 상황
+   
+<div align = "center">
+<img width="640" alt="7" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/2274ce42-7f2d-4e45-aadf-91f6662e9827">
+</div>  
+
+```java
+/*
+ * Backtracking - Maze Problem(미로찾기)
+ */
+public final class Maze_problem {
+	/*
+	 * 미로 배열 생성
+	 */
+    private final int[][] mazeArray = {
+    									{1, 1, 1, 1, 1, 1, 1, 1},
+    									{0, 0, 0, 0, 0, 0, 0, 1},
+    									{1, 1, 1, 0, 1, 1, 1, 1},
+    									{1, 0, 0, 0, 0, 0, 0, 0},
+    									{1, 1, 1, 1, 1, 1, 1, 1},
+    								  };
+    
+    /*
+     * 방문 체크 배열 생성
+     */
+    private final boolean[][] mazeVisitArray = {
+    											{false, false, false, false, false, false, false, false},
+    											{false, false, false, false, false, false, false, false},
+    											{false, false, false, false, false, false, false, false},
+    											{false, false, false, false, false, false, false, false},
+    											{false, false, false, false, false, false, false, false}
+    										   };
+    
+    private boolean isFinished = false; // 최종 지점 도착을 확인하기 위한 변수
+    private final int DEST_X = 7; // 최종 도착 지점의 X좌표 지정
+    private final int DEST_Y = 3; // 최종 도착 지점의 Y좌표 지정
+    private final int START_X = 0; // 처음 시작 지점 X좌표 지정
+    private final int START_Y = 1; // 처음 시작 지점 Y좌표 지정
+    private final int WALL = 1; // 벽은 문제 조건에 따라 1로 지정
+    
+    public void escape() {
+    	/*
+    	 * 탈출을 시작하는 메서드
+    	 */
+    	System.out.println("Start!");
+    	move(START_X, START_Y);
+    }
+    
+    private void visit(int x, int y) {
+    	/*
+    	 * 미로 방문 메서드
+    	 */
+    	mazeVisitArray[y][x] = true; // 해당 좌표 값에 대해 방문 했으므로 true
+    	System.out.print("("+ x + ", " + y + ")"); // 좌표값 표시
+    	System.out.println();
+    }
+    
+    private void move(int x, int y) {
+    	if(isFinished) {
+    		/*
+    		 * 길을 찾았으면 더 이상 탐색하지 않아야 함
+    		 * 미로를 찾더라도, 실행 흐름 상 모든 메서드가 pop되어질 때 까지
+    		 * 재귀 메서드가 계속 호출되기 떄문에 미로를 찾으면 다른 메서드는
+    		 * 더 이상 탐색하지 않도록 빠르게 중단해야함
+    		 */
+    		return; // 메서드 종료
+    	}
+    	
+    	else if(x == DEST_X && y == DEST_Y) {
+    		/*
+    		 * 도착 지점에 도착하게 되면
+    		 */
+    		isFinished = true; // 최종 지점에 도착함을 알리는 변수는 true
+    	}
+    	
+    	else if(x < 0 || y < 0 || x > mazeArray[y].length - 1 || y > mazeArray.length - 1) {
+    		/*
+    		 * 미로를 넘어서게 되면 메서드 종료
+    		 */
+    		
+    		return; // 메서드 종료
+    	}
+    	
+    	else if (mazeArray[y][x] == WALL) {
+    		/*
+    		 * 미로에서 벽을 넘으면 메서드 종료
+    		 */
+    		
+    		return; // 메서드 종료
+    	}
+    	
+    	else if(mazeVisitArray[y][x] == true) {
+    		/*
+    		 * 방문했던 곳을 다시 방문한다면 메서드 종료
+    		 */
+    		
+    		return;
+    	}
+    	
+    	visit(x, y); // 조건에 다 불일치하면, 길이 있는 뜻으로 방문
+    	
+    	move(x + 1, y); // 오른쪽으로 이동
+    	move(x, y + 1); // 아래쪽으로 이동
+    	move(x - 1, y); // 왼쪽으로 이동
+    	move(x, y - 1); // 위쪽으로 이동
+    }
+}
+```
+```java
+public class Maze_Main {
+	public static void main(String[] args) {
+		Maze_problem maze = new Maze_problem(); // 미로 문제 객체 생성
+		maze.escape(); // 탈출 시작
+		System.out.println("Escape!"); // 탈출 완료되면 표시
+	}
+}
+```

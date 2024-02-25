@@ -204,7 +204,7 @@ public class Fibonacci_Divide_And_Conquer {
 <div align = "center">
 <img width="595" alt="img (1)" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/eb0df596-8aa1-4c4f-91f3-74ce2510dcce">
 </div>  
-1. 조합을 구할 때, 점화식 관점에서 분할 합병 방식으로 해결 가능
+1. 조합을 구할 때, 점화식 관점에서 분할 합병 방식으로 해결 가능   
 2. 중단 조건 (r = 0 또는 n = r)   
 
 ```java
@@ -233,7 +233,124 @@ public class Combination {
 	}
 }
 ```
+-----
+### 재귀 - 분할 관점
+-----  
+1. 큰 문제는 재귀적으로 작은 문제로 분할 후 작은 문제를 해결해 큰 문제를 해결
+2. 반복적인 동일한 규칙으로 큰 문제를 작은 문제로 쪼갤 수 있는 문제는 재귀적인 분할 방식으로 접근 가능
 
+-----
+### 배열의 값 더하기
+-----  
+<div align = "center">
+<img width="640" alt="1" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/e52b6a29-ce0e-4182-992d-2675bd1ac8cf">
+</div>   
+
+1. 분할 방식
+     - 중앙값 = (앞 인덱스 + 마지막 인덱스) / 2   
+     - 좌편 sum(앞 인덱스, 중앙값)   
+     - 우편 sum(중앙값 + 1, 마지막 인덱스)   
+
+2. 중단 조건 (startIndex ==  endIndex) : 가장 작은 부분으로 분할하게 되면 결국 startIndex = endIndex에 도달
+<div align = "center">
+<img width="640" alt="2" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/d955b3b8-c559-436a-9a6f-92cbc4e2d632">
+</div>   
+
+<div align = "center">
+<img width="311" alt="3" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/a67b91a6-27d2-445a-9b31-bd7ad16261e8">
+</div>    
+
+<div align = "center">
+<img width="505" alt="4" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/b0497c4d-e094-40bd-afcc-8dbdb4e07940">
+</div>    
+
+```java
+/*
+ * Array Sum (배열의 값 더하기)
+ */
+public class ArraySum {
+	public static void main(String[] args) {
+		int[] arr = new int[]{4, 2, 5, 1, 5, 3, 1, 2};
+		
+		int result = sum(arr, 0, arr.length - 1);
+		
+		System.out.println(result);
+	}
+	
+	public static int sum(int[] arr, int startIndex, int endIndex) {
+		/*
+		 * 배열의 값 더하기
+		 */
+		
+		/*
+		 * 종단 조건 : 지속적으로 분할하여 마지막 startIndex와 endIndex가 동일할 때 
+		 */
+		if(startIndex == endIndex) {
+			return arr[startIndex]; 
+		}
+		
+		/*
+		 * 중앙값(middleIndex) 구하기
+		 */
+		int middleIndex = (startIndex + endIndex) / 2;
+		
+		/*
+		 * 배열의 값을 Divide and Conquer로 구하기 위해, 배열에 대해 
+		 *   startIndex ~ middleIndex / middleIndex + 1 ~ endIndex까지 지속적으로 분할
+		 *   -> 가장 작게 나누게 되면, 그 때부터 병합하여 문제를 해결
+		 */
+		return sum(arr, startIndex, middleIndex) + sum(arr, middleIndex + 1, endIndex);
+	}
+}
+```
+
+-----
+### 최댓값 구하기 (분할 방식)
+-----  
+<div align = "center">
+<img width="640" alt="1" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/de3e8df4-aca8-4872-8b3c-2a75b184cc4e">
+</div>  
+
+1. 정렬되지 않은 1차원 배열에서 최댓값 구하기 위해, 배열을 가장 작은 단위로 쪼갠 후 가장 큰 값을 찾아내는 방식     
+2. 분할 방식
+	- 중앙값 = ( 앞 인덱스 + 마지막 인덱스 ) / 2  
+	- 좌편max (앞 인덱스, 중앙값)   
+	- 우편max (중앙값 + 1, 마지막 인덱스)   
+   
+3. 중단 조건 : startIndex == endIndex   
+<div align = "center">
+<img width="640" alt="2" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/fefc862a-e51d-44e0-b4cb-cce72f898fb1">
+</div>  
+
+```java
+/*
+ * Array Max (배열의 최대값 구하기) : Divide
+ */
+public class Array_Max {
+	public static void main(String[] args) {
+		int[] arr = new int[] {2, 1, 6, 7, 5, 8, 3, 4};
+		System.out.println(max(arr, 0, arr.length - 1));
+	}
+	
+	public static int max(int[] arr, int startIndex, int endIndex) {
+		/*
+		 * Array Max (배열의 최댓값 구하기)
+		 */
+		
+		/*
+		 *  종단 조건 : 지속적으로 분할하여 마지막 startIndex와 endIndex가 동일할 때 
+		 */
+		if(startIndex == endIndex)
+			return arr[startIndex];
+		
+		int middleIndex = (startIndex + endIndex) / 2; // 중앙값은 (처음 인덱스 + 마지막 인덱스) / 2
+		int leftValue = max(arr, startIndex, middleIndex); // 좌편에서 가장 큰 값은 처음 인덱스에서부터 중앙값 인덱스 중 최댓값
+		int rightValue = max(arr, middleIndex + 1, endIndex); // 우편에서 가장 큰 값은 중앙값 + 1 인덱스에서부터 마지막 인덱스 중 최댓값
+		
+		return Math.max(leftValue, rightValue); // 좌편 큰 값과 우 편 큰 값 중 가장 큰 값 출력
+	}
+}
+```
 -----
 ### 재귀 - 백트래킹(Back Tracking)
 -----  

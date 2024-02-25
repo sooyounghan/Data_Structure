@@ -126,7 +126,8 @@
 <div align = "center">
 <img width="399" alt="1" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/2737e117-7ce0-4a61-8302-ff94627444aa">
 </div>
-: 최초 시작 인덱스 기준에 따라 index 계산식이 달라짐
+: 최초 시작 인덱스 기준에 따라 index 계산식이 달라짐   
+
 
 < MaxHeap : 값이 클 수록 우선순위가 큰 Heap >
 ```java

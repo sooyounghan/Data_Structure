@@ -129,6 +129,7 @@
 : 최초 시작 인덱스 기준에 따라 index 계산식이 달라짐   
 
 
+ 
 < MaxHeap : 값이 클 수록 우선순위가 큰 Heap >
 ```java
 package Heap;

@@ -118,7 +118,3 @@ h(k, i) = (h'(k) + i) mod m
 2. 탐색 특성 상 키를 찾거나 빈 공간을 만날 때까지 탐색하는데 군집으로 인해
    빈 공간이 존재하지 않을 수 있기 때문에 탐색 횟수가 많아질 수 있음
 3. 중복된 키 : 버킷에 이미 동일한 키가 존재한다면 값만 덮어씀
-
-<div align = "center">
-<img width="1097" alt="10" src="https://github.com/sooyounghan/Web/assets/34672301/f70e73cc-d61c-4d60-8873-4a57c2f930c6">
-</div>

@@ -118,3 +118,22 @@ h(k, i) = (h'(k) + i) mod m
 2. 탐색 특성 상 키를 찾거나 빈 공간을 만날 때까지 탐색하는데 군집으로 인해
    빈 공간이 존재하지 않을 수 있기 때문에 탐색 횟수가 많아질 수 있음
 3. 중복된 키 : 버킷에 이미 동일한 키가 존재한다면 값만 덮어씀
+
+
+------
+### Linear Probing 삭제
+------   
+<div align = "center">
+<img width="1097" alt="10" src="https://github.com/sooyounghan/Web/assets/34672301/ff82bd68-2c94-4913-bb09-f3442cb02f49">
+</div>   
+
+1. 삭제할 키는 key2이고, 해시 값은 1이라고 가정
+2. 만약 삭제만 하고 키의 재배치에 대한 추가적 연산이 없다면, key 3을 탐색한다고 했을 때, 키가 존재하나 빈 공간을 만나 종료되는 문제 발생
+3. null이 존재하는 인덱스를 기준으로 해시값이 인덱스보다 작거나 같은 키를 찾아 재배치 필요
+
+<div align = "center">
+<img width="1097" alt="11" src="https://github.com/sooyounghan/Web/assets/34672301/bd794567-a4b0-44e3-ab15-e883b9a6de89">
+</div>   
+
+4. null이 존재하는 인덱스는 1이고, moveIndex를 이용해 1보다 작거나 같은 해시값을 가진 키를 찾음
+5. 2번 인덷스에 있던 키의 해시값이 0이므로 1번 위치로 이동

@@ -136,4 +136,60 @@ h(k, i) = (h'(k) + i) mod m
 </div>   
 
 4. null이 존재하는 인덱스는 1이고, moveIndex를 이용해 1보다 작거나 같은 해시값을 가진 키를 찾음
-5. 2번 인덷스에 있던 키의 해시값이 0이므로 1번 위치로 이동
+5. 2번 인덱스에 있던 키의 해시값이 0이므로 1번 위치로 이동
+
+<div align = "center">
+<img width="1096" alt="12" src="https://github.com/sooyounghan/Web/assets/34672301/67e58456-2662-4a29-bceb-5527c503d310">
+</div>   
+
+6. 키의 이동으로 인해 null이 존재하는 인덱스가 2가 됨
+7. moveIndex를 이용해 2보다 작거나 같은 해시값을 찾음
+8. 그러나 3번 인덱스에 있던 키의 해시값은 2보다 크므로 재배치 연산 종료
+
+<div align = "center">
+<img width="1096" alt="13" src="https://github.com/sooyounghan/Web/assets/34672301/3a647670-1287-4389-96cb-5feb195e3906">
+</div>  
+
+9. key4를 삭제한다고 가정하면, key의 해시값은 3
+10. 해당 키를 삭제
+
+<div align = "center">
+<img width="1096" alt="14" src="https://github.com/sooyounghan/Web/assets/34672301/82f3a3cc-8082-4e7e-9bd3-e28a3b6a2da5">
+</div>  
+
+11. 해당 키 삭제로 인해 null 인덱스는 3이고, moveIndex를 이용해 3보다 작거나 같은 해시 값을 찾음
+12. 4번 인덱스에 있던 키의 해시값이 1이므로 3번 위치로 이동
+
+<div align = "center">
+<img width="1097" alt="15" src="https://github.com/sooyounghan/Web/assets/34672301/f40d0763-9642-42da-a136-da2a91a9bd2b">
+</div>  
+
+13. null이 존재하는 index는 4이고 moveIndex를 이용해 4보다 작거나 같은 해시 값을 가진 키를 찾음
+14. 5번 인덱스에 있던 키의 해시값이 2이므로 4번 위치로 이동
+
+<div align = "center">
+<img width="1099" alt="16" src="https://github.com/sooyounghan/Web/assets/34672301/080e755f-703f-4cde-9874-ab1474a8c859">
+</div>  
+
+15. null이 존재하는 index는 4이고, moveIndex를 이용해 4보다 작거나 같은 해시 값을 가진 키를 찾음
+16. moveIndex가 가리키는 것은 null이므로 재배치 연산 종료
+
+------
+### Linear Probing 삭제 시 일반적 재배치 방식의 한계점
+------   
+<div align = "center">
+<img width="1097" alt="17" src="https://github.com/sooyounghan/Web/assets/34672301/b359c99f-8389-41a3-aac4-378f3af66641">
+</div>  
+
+1. 일반적인 방식만으로는 예외적인 문제 발생 가능
+2. 인덱스를 기준으로 해시값이 인덱스보다 작거나 같은 키를 찾아서 끌어 당기기 때문에
+   그림과 같은 상황이라면 조사 방식의 한계점(빈 공간을 만나면서 조사 중지)때문에 key3을 찾을 수 없음
+
+<div align = "center">
+<img width="1096" alt="18" src="https://github.com/sooyounghan/Web/assets/34672301/9e9b5443-2d5f-4859-8197-8b25ef6dce6d">
+</div>  
+
+3. 그러므로 null대신 Dummy null Entry를 삽입하는 방식으로 조사를 진행
+4. 더미 노드는 키 삽입 시 자연스럽게 제거되거나 또는 버킷의 크기를 늘릴 때 자연스럽게 제거
+5. 이러한 방식을 Lazy Deletion
+

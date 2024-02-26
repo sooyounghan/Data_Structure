@@ -171,7 +171,7 @@ h(k, i) = (h'(k) + i) mod m
 <img width="1099" alt="16" src="https://github.com/sooyounghan/Web/assets/34672301/080e755f-703f-4cde-9874-ab1474a8c859">
 </div>  
 
-15. null이 존재하는 index는 4이고, moveIndex를 이용해 4보다 작거나 같은 해시 값을 가진 키를 찾음
+15. null이 존재하는 index는 5이고, moveIndex를 이용해 5보다 작거나 같은 해시 값을 가진 키를 찾음
 16. moveIndex가 가리키는 것은 null이므로 재배치 연산 종료
 
 ------

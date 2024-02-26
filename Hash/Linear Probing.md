@@ -49,7 +49,7 @@ h(k, i) = (h'(k) + i) mod m
 
 < 예제 2 >
 <div align = "center">
-<img width="1097" alt="4" src="https://github.com/sooyounghan/Web/assets/34672301/56354b5c-a27f-4be6-b223-8be910894ab1">
+<img width="1098" alt="0" src="https://github.com/sooyounghan/Web/assets/34672301/0cedbce0-f6e1-49ff-9c8a-e07df7264204">
 </div>  
 
 - 탐색할 키가 key 10이고, 해시 값이 3이면, 먼저 버킷의 3번 인덱스에서 시작
@@ -69,20 +69,20 @@ h(k, i) = (h'(k) + i) mod m
 
 < 예제 >
 <div align = "center">
-<img width="1097" alt="5" src="https://github.com/sooyounghan/Web/assets/34672301/2eb1cafa-e26d-4e8a-bb54-88d7e6cea387">
-</div> 
+<img width="1097" alt="-1" src="https://github.com/sooyounghan/Web/assets/34672301/ac396425-8ff6-4240-a6d1-38cd51cf397a">
+</div>
 
 - key 1부터 key 6까지 순차적으로 키를 삽입한다고 가정
 - 해시 함수에 의해 맨 처음 key 1의 해시값이 0이면 버킷의 0번 위치에 저장
 
 <div align = "center">
-<img width="1098" alt="6" src="https://github.com/sooyounghan/Web/assets/34672301/e7794234-27c5-47d2-b346-f64ea053faf1">
+<img width="1097" alt="5" src="https://github.com/sooyounghan/Web/assets/34672301/2eb1cafa-e26d-4e8a-bb54-88d7e6cea387">
 </div>   
 
 - 두 번째로 key2의 해시값이 1이면, 버킷의 1번 위치에 저장
 
 <div align = "center">
-<img width="1096" alt="7" src="https://github.com/sooyounghan/Web/assets/34672301/71b0ec49-c988-4913-b964-838d9b90a3d5">
+<img width="1098" alt="6" src="https://github.com/sooyounghan/Web/assets/34672301/e7794234-27c5-47d2-b346-f64ea053faf1">
 </div>   
 
 - key3의 해시값이 0이며, 버킷의 0번 위치에 저장하려고 하나 이미 키가 존재
@@ -91,21 +91,25 @@ h(k, i) = (h'(k) + i) mod m
 - 빈 공간이면 해당 위치에 키를 저장
 
 <div align = "center">
-<img width="1096" alt="8" src="https://github.com/sooyounghan/Web/assets/34672301/230b97c2-79b9-4118-9fb7-380281845d2d">
-</div>
+<img width="1096" alt="7" src="https://github.com/sooyounghan/Web/assets/34672301/71b0ec49-c988-4913-b964-838d9b90a3d5">
+</div>   
 
 - key4의 해시값은 3이며, 버킷의 3번 위치에 저장
 
 <div align = "center">
-<img width="1097" alt="9" src="https://github.com/sooyounghan/Web/assets/34672301/43a837f8-d9e8-4fce-9e06-43dba1c894d0">
+<img width="1096" alt="8" src="https://github.com/sooyounghan/Web/assets/34672301/230b97c2-79b9-4118-9fb7-380281845d2d">
 </div>
 
 - key5의 해시값이 1이며, 버킷의 1번 위치에 저장하려고 하나 이미 키가 존재
 - 빈 공간을 찾을 때 까지 순차적으로 이동해 빈 공간에 키를 삽입
 
 <div align = "center">
-<img width="1097" alt="10" src="https://github.com/sooyounghan/Web/assets/34672301/f70e73cc-d61c-4d60-8873-4a57c2f930c6">
+<img width="1097" alt="9" src="https://github.com/sooyounghan/Web/assets/34672301/43a837f8-d9e8-4fce-9e06-43dba1c894d0">
 </div>
 
 - key6의 해시값이 2이며, 버킷의 2번 위치에 저장하려고 하나 이미 키가 존재
 - 빈 공간을 찾을 때까지 빈 공간에 키를 삽입
+
+<div align = "center">
+<img width="1097" alt="10" src="https://github.com/sooyounghan/Web/assets/34672301/f70e73cc-d61c-4d60-8873-4a57c2f930c6">
+</div>

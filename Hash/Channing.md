@@ -96,7 +96,7 @@
      Collection Library의 LinkedList 이용
 
 < Entry >
-```jsp
+```java
 package HashTable_Channing;
 
 class Entry {
@@ -111,7 +111,7 @@ class Entry {
 ```
 
 < Channing Hash Table >
-```jsp
+```java
 import java.util.LinkedList;
 
 public class ChanningHashTable {
@@ -304,7 +304,7 @@ public class ChanningHashTable {
 ```
 
 < Main >
-```jsp
+```java
 public class Main {
     public static void main(String[] args) {
 	    ChanningHashTable channingHashTable = new ChanningHashTable(4);

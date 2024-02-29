@@ -68,7 +68,7 @@
 <img width="1098" alt="6" src="https://github.com/sooyounghan/Web/assets/34672301/f7a130b8-7185-48a3-a2cf-088c58d2acb9">
 </div>   
 
-1. 삭제할 key4의 해시값이 24이며, Bucket의 24번 위치에 접근하여 동일한 키가 존재하는지  노드 ㅌ마색
+1. 삭제할 key4의 해시값이 24이며, Bucket의 24번 위치에 접근하여 동일한 키가 존재하는지  노드 탐색
 
 <div align = "center">
 <img width="1096" alt="7" src="https://github.com/sooyounghan/Web/assets/34672301/984e5d34-56fd-4882-af4b-f2e4fe8675c8">

@@ -197,7 +197,7 @@ h(k, i) = (h'(k) + i) mod m
 ### Linear Probing 구현
 ------   
 < Entry >
-```jsp
+```java
 public class Entry {
     Object key; // HashTable의 key
     Object value; // 저장할 값
@@ -217,7 +217,7 @@ public class Entry {
 ```
 
 < Linear Probing >
-```jsp
+```java
 /*
  * Linear Probing Hash Table Class
  */
@@ -725,7 +725,7 @@ int newBucketSize = tableSizeFor(prevBucketSize << 1);
 ### Quadratic Probing 구현
 ------   
 < Quadratic Probing >
-```jsp
+```java
 public class Quadratic_Probing {
     private static final int MAXIMUM_CAPACITY = 1 << 30;  // 버킷으로 할당할 수 있는 최대 크기
     private static final float ROAD_FACTOR_THRESHOLD = 0.75F;  // 버킷의 엔트리가 75%를 넘으면 버킷의 크기를 늘림
@@ -1033,7 +1033,7 @@ h(key, i) = (h'(key) + (2 * i) + (2 * i^2)) mod m
 3. Linear Probing과 해시 함수만 차이
 
 < Main >
-```jsp
+```java
 package HashTable;
 
 public class Main {

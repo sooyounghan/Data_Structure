@@ -112,7 +112,7 @@
 ### 그래프와 트리의 정리
 -----  
 <div align = "center">
-<img width="367" alt="13" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/c5e97a77-5db1-48fe-892e-ac72ec83f2c0">
+<img src="https://github.com/sooyounghan/Data-Structure/assets/34672301/c5e97a77-5db1-48fe-892e-ac72ec83f2c0">
 </div> 
 
 

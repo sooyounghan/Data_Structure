@@ -59,7 +59,7 @@ public class Adjacent_Matrix {
 	 * 3. 간선 : 배열의 값으로 간선의 여부를 표현
 	 */
 	
-	int[][] graph = null; // Graph 배열
+	final int[][] graph; // Graph 배열
 	
 	public Adjacent_Matrix(int size) {
 		/*

@@ -143,6 +143,10 @@ public class Adjacent_Matrix {
 }
 ```
 
+<div align = "center">
+<img src="https://github.com/sooyounghan/Data-Structure/assets/34672301/d7e9a33d-1bd0-44a7-b60f-dc0fa7b4cee2">
+</div>
+
 -----
 ### 너비 우선 탐색 (BFS)
 -----
@@ -333,3 +337,8 @@ public class Adjacent_List {
 
 }
 ```
+
+<div align = "center">
+<img src="https://github.com/sooyounghan/Data-Structure/assets/34672301/8cf0ba9a-5349-4394-9806-07eedcb8fed9">
+</div>
+

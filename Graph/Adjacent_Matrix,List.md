@@ -5,8 +5,8 @@
 <img width="1097" alt="1" src="https://github.com/sooyounghan/Data-Structure/assets/34672301/30162556-6812-4481-a076-175e7ae3233e">
 </div>
 
-1. 인접 행렬 (Adjacent Matrix)
-2. 인접 리스트 (Adjacent List)
+1. 인접 행렬 (Adjacent Matrix) : 인덱스를 이용해 접근 가능
+2. 인접 리스트 (Adjacent List) : 연결리스트의 순차 탐색으로 접근 가능
 
 -----
 ### 인접 행렬 (Adjacent Matrix)

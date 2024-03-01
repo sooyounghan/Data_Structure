@@ -315,11 +315,11 @@ public class Adjacent_List {
 		
 		queue.add(start); // 먼저 시작 정점 start에 대해 삽입
 		
-		visit(start); // start 방문 표시
-		
 		while(!queue.isEmpty()) { // 큐가 비어있지 않을 때 까지,
 			int u = queue.poll(); // 가장 앞에 있는 원소를 뺌 (Vertex u)
-			
+
+			visit(u); // start 방문 표시
+
 			for(Edge edge : graph[u]) { // 정점 u에 대해 연결된 간선에 대해
 				if(visit[edge.v] == 0) { // 아직 정점 v에 대해 방문하지 않았으면,
 					queue.add(edge.v); // 정점 v를 큐에 삽입 후,

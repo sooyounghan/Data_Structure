@@ -167,6 +167,10 @@
 -----
 ### MST - Kruskal Algorithm
 -----
+<div align = "center">
+<img src="https://github.com/sooyounghan/Web/assets/34672301/9ccd348b-ff0e-498c-ab2e-c37da1f15b85">
+</div>
+
 < Edge Class >
 ```java
 public class Edge implements Comparable<Edge>{

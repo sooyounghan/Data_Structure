@@ -81,4 +81,81 @@ GENERIC_MST(G, w) {
    
 -----
 ### 최소 신장 트리 일반 알고리즘
------
+-----   
+<div align = "center">
+<img width="1098" alt="7" src="https://github.com/sooyounghan/Web/assets/34672301/94d5d2e7-7e07-4365-9f45-358c8e6af794">
+</div>
+
+1. 그래프를 임의의로 절단한다고 했을 때, 가상의 두 그래프로 나뉠 수 있음
+2. 절단을 교차하는 간선 중 안전 간선은 가중치가 1인 간선
+
+<div align = "center">
+<img width="1097" alt="8" src="https://github.com/sooyounghan/Web/assets/34672301/bf0dc0c8-7fa8-4529-8866-2eceb3b6d743">
+</div>
+
+3. 안전 간선을 A 간선 집합에 포함시킴
+4. 그리고 A 집합은 아직 신장 트리를 만족하지 못하므로 신장 트리를 만족할 때까지, 게속 반복적으로 절단하는 과정 거침
+
+<div align = "center">
+<img width="1097" alt="9" src="https://github.com/sooyounghan/Web/assets/34672301/b8e42577-046d-4354-956f-af5caa3de71b">
+</div>
+
+5. 그래프를 임의로 절단했을 때, 안전 간선은 가중치가 2인 간선
+
+<div align = "center">
+<img width="1096" alt="10" src="https://github.com/sooyounghan/Web/assets/34672301/f3e50020-48ad-4447-8da6-4a5531b80bf6">
+</div>
+
+6. 완전 간선을 C 그래프에 포함시킴
+7. 가상의 A 그래프와 C 그래프로 나누었으나, 알고리즘으로 보면 A라는 간선 집합에는 두 개의 트리 (A 그래프, C 그래프)가 존재하며 Forest 형성
+
+<div align = "center">
+<img width="1096" alt="11" src="https://github.com/sooyounghan/Web/assets/34672301/607fadd0-7f1c-43ba-a8e9-7d12c9c5523f">
+</div>
+
+8. 그래프를 임의로 절단했을 때 안전 간선은 가중치가 2인 간선
+
+<div align = "center">
+<img width="1097" alt="12" src="https://github.com/sooyounghan/Web/assets/34672301/fa50bf58-e48c-4866-aeb5-0ee67de2f0a2">
+</div>
+
+9. 안전 간선을 A 그래프에 포함
+
+<div align = "center">
+<img width="1097" alt="13" src="https://github.com/sooyounghan/Web/assets/34672301/9cda57a3-7505-4952-9299-8c5ce0bd28e4">
+</div>
+
+10. 그래프를 임의로 절단했을 때, 안전 간선은 가중치가 3인 간선
+
+<div align = "center">
+<img width="1098" alt="14" src="https://github.com/sooyounghan/Web/assets/34672301/725e0ca1-0eee-4497-8e04-5efc997229ca">
+</div>
+
+11. 안전 간선을 C 그래프에 포함 시킴
+
+<div align = "center">
+<img width="1097" alt="15" src="https://github.com/sooyounghan/Web/assets/34672301/281fd67f-9c22-4ddd-ab97-f7e10b886b45">
+</div>
+
+12. 그래프를 임의로 절단했을 때 안전 간선은 가중치가 3인 간선
+
+<div align = "center">
+<img width="1097" alt="16" src="https://github.com/sooyounghan/Web/assets/34672301/927e6556-aa3a-4c86-8f82-4a26e81cda18">
+</div>
+
+13. 안전 간선을 A 그래프에 포함
+
+<div align = "center">
+<img width="1098" alt="17" src="https://github.com/sooyounghan/Web/assets/34672301/33649c2f-df14-479e-b45d-76792e30656f">
+</div>
+
+14. 그래프를 절단했을 때, 안전 간선은 가중치가 3인 간선
+
+<div align = "center">
+<img width="1096" alt="18" src="https://github.com/sooyounghan/Web/assets/34672301/c71287b9-f0a5-4bca-8423-bbae4c4e9552">
+</div>
+
+15. 안전 간선을 A 그래프에포함시킴
+16. A 집합에는 6개의 간선이 포함되며, 안전 간선만을 추가했으므로 최소 신장 트리
+17. 해당 그림에서는 A 집합에 Forest를 형성하며 두 개의 트리로 존재하는 예시   
+    (실제로는 여러 개의 트리로 집합에 포함될 수 있으며, 모든 간선이 연결되면 하나의 트리로 형성)

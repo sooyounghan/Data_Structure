@@ -160,6 +160,9 @@
 17. 모든 간선에 대한 확인이 끝나면, 간선 집합에는 최소 신장 트리를 만족하는 안전 간선만 존재
 18. 최소 가중치 순으로 정렬한 후 간선을 확인하는 알고리즘!
 
+<div align = "center">
+<img src="https://github.com/sooyounghan/Web/assets/34672301/e4625cab-49b1-4b1a-8956-48652ddaf796">
+</div>
 
 -----
 ### MST - Kruskal Algorithm

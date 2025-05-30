@@ -178,3 +178,114 @@ int main(void) {
 ```
 10 -> 20 -> 30 -> 40 -> 
 ```
+
+-----
+### 원형 연결 리스트의 이용
+-----
+1. 여러 응용 프로그램을 하나의 CPU를 이용하여 실행할 때 필요
+   - 현재 실행 중인 모든 응용 프로그램은 원형 연결 리스트에 보관
+   - 운영 체제는 원형 연결 리스트에 있는 프로그램을 실행을 위해 고정된 시간 슬롯 제공
+   - 운영 체제는 모든 응용 프로그램이 완료될 때까지 원형 연결 리스트를 게속 순회
+<div align="center">
+<img src="https://github.com/user-attachments/assets/d0701aca-1120-4bab-81b3-8cd61097b8ba">
+</div>
+
+2. 멀티 플레이어 게임
+   - 모든 플레이어는 원형 리스트에 저장
+   - 한 플레이어의 기회가 끝나면 포인터를 앞으로 움직여 다음 플레이어의 순서가 됨
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef char element[100];
+typedef struct ListNode { // 노드 타입
+    element data;
+    struct ListNode* link;
+} ListNode;
+
+// 메모리 해제
+void free_list(ListNode *head) {
+    if(head == NULL) return; // 아무 노드도 없다면 메모리 해제할 필요 없음
+
+    // head에서부터 시작하여, p가 다시 한 바퀴 되돌아올 때까지 반복
+    ListNode *p = head->link;
+    ListNode *temp = NULL;
+
+    while(p != head) {
+        temp = p;
+
+        p = p->link;
+
+        free(temp);
+    }
+
+    free(head); // 마지막으로 head 동적 할당 해제제
+}
+
+// 원형 연결 리스트의 마지막에 삽입하는 함수
+ListNode* insert_last(ListNode *head, element data) {
+    ListNode *node = (ListNode *)malloc(sizeof(ListNode));
+
+    strcpy(node->data, data); // 데이터 복사
+
+    if(node == NULL) { // 메모리 할당 실패
+        fprintf(stderr, "메모리 할당 실패\n");
+        exit(1);
+    }
+
+    if(head == NULL) { // 리스트가 비어 있는 경우
+        head = node;
+        node->link = head; // 자기 자신을 가리킴
+    }
+
+    else {
+        node->link = head->link; // 새로운 노드가 첫 번쨰 노드를 가리킴
+        head->link = node; // 마지막 노드가 새로운 노드를 가리킴
+        head = node; // head는 node를 가리킴 = 새로운 노드를 마지막 노드로 설정
+    }
+
+    return head;
+}
+
+int main(void) {
+    ListNode *head = NULL;
+
+    head = insert_last(head, "KIM");
+    head = insert_last(head, "PARK");
+    head = insert_last(head, "CHOI");
+    
+    // 리스트 순회 및 출력
+    ListNode *p = head->link;
+
+    for(int i = 0; i < 10; i++) {
+        printf("현재 차례 = %s\n", p->data);
+        p = p->link;
+
+    }
+
+    free_list(head); // 메모리 해제
+
+    return 0;
+}
+```
+   - 실행 결과
+```
+현재 차례 = KIM
+현재 차례 = PARK
+현재 차례 = CHOI
+현재 차례 = KIM
+현재 차례 = PARK
+현재 차례 = CHOI
+현재 차례 = KIM
+현재 차례 = PARK
+현재 차례 = CHOI
+현재 차례 = KIM
+```
+
+3. 원형 큐에 사용 : 원형 큐에서는 front, rear 두 개의 포인터 사용
+<div align="center">
+<img src="https://github.com/user-attachments/assets/d20fbf55-10af-4251-8ee1-4eda7ad6d569">
+</div>
+

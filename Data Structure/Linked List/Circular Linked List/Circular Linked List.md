@@ -53,7 +53,7 @@ ListNode* insert_first(ListNode *head, element data) {
 }
 ```
 
-8. 원형 리스트 끝에 삽립
+8. 원형 리스트 끝에 삽입
    - 원형으로 연결되어 있으므로, 어디가 처음이고 끝인지 불분명
    - 따라서, head 위치만 새로운 노드로 바꾸어주면, 새로운 노드가 마지막 노드
 <div align="center">
@@ -185,7 +185,7 @@ int main(void) {
 1. 여러 응용 프로그램을 하나의 CPU를 이용하여 실행할 때 필요
    - 현재 실행 중인 모든 응용 프로그램은 원형 연결 리스트에 보관
    - 운영 체제는 원형 연결 리스트에 있는 프로그램을 실행을 위해 고정된 시간 슬롯 제공
-   - 운영 체제는 모든 응용 프로그램이 완료될 때까지 원형 연결 리스트를 게속 순회
+   - 운영 체제는 모든 응용 프로그램이 완료될 때까지 원형 연결 리스트를 계속 순회
 <div align="center">
 <img src="https://github.com/user-attachments/assets/d0701aca-1120-4bab-81b3-8cd61097b8ba">
 </div>

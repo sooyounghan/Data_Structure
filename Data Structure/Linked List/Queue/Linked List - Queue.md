@@ -13,7 +13,7 @@
 5. 큐의 요소가 없는 경우 front와 rear는 NULL 값
 6. 큐의 요소들은 구조체로 정의되며, 데이터를 저장하는 data 필드와 다음 노드를 가리키기 위한 포인터가 들어있는 link 필드로 구성
 <div align="center">
-<img src="(https://github.com/user-attachments/assets/3dc62d59-3318-4982-8d4c-13f841cfcabf">
+<img src="https://github.com/user-attachments/assets/3dc62d59-3318-4982-8d4c-13f841cfcabf">
 </div>
 
 7. 연결된 큐 정의

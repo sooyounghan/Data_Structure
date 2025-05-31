@@ -156,4 +156,12 @@ int main(void) {
     return 0;
 }
 ```
-
+  - 실행 결과
+```
+1 -> NULL
+2 -> 1 -> NULL
+3 -> 2 -> 1 -> NULL
+2 -> 1 -> NULL
+1 -> NULL
+NULL
+```

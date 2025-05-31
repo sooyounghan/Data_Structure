@@ -21,7 +21,7 @@ ListNode* search(ListNode *L, element data) {
 }
 ```
 
-2. get_size() : 저장된 데이터의 개수를 반환하는 함수\
+2. get_size() : 저장된 데이터의 개수를 반환하는 함수
 ```c
 // 문제 4 : 저장된 데이터의 개수를 반환하는 함수
 int get_size(ListNode *L) {

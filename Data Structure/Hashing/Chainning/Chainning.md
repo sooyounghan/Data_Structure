@@ -60,7 +60,8 @@ void hash_chain_add(element item, struct ListNode* ht[]) {
     for(; node; node_before = node, node = node->link) { // node가 마지막 노드에 접근할 때까지, 이전 노드는 현재 노드를 가리키고, 노드는 그 다음 노드 가리킴
         if(node->item.key == item.key) { // 만약, 삽입하는 값이 중복되는 값이라면,
             fprintf(stderr, "이미 탐색키가 저장되어 있습니다.\n"); // 오류 발생
-            return;}    
+            return;
+        }    
     }
 
     // 아니라면,
@@ -138,7 +139,8 @@ void hash_chain_add(element item, struct ListNode* ht[]) {
     for(; node; node_before = node, node = node->link) { // node가 마지막 노드에 접근할 때까지, 이전 노드는 현재 노드를 가리키고, 노드는 그 다음 노드 가리킴
         if(node->item.key == item.key) { // 만약, 삽입하는 값이 중복되는 값이라면,
             fprintf(stderr, "이미 탐색키가 저장되어 있습니다.\n"); // 오류 발생
-            return;}    
+            return;
+        }    
     }
 
     // 아니라면,

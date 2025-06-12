@@ -30,10 +30,10 @@ typedef struct {
 
 typedef struct ListNode {
     element item;
-    struct list* link; // 자기 참조 구현체
+    struct ListNode* link; // 자기 참조 구현체
 } ListNode; // List 구조체 정의
 
-struct list* hash_table[TABLE_SIZE]; // 해시 테이블을 List 형태 (배열) 구현
+struct ListNode* hash_table[TABLE_SIZE]; // 해시 테이블을 List 형태 (배열) 구현
 ```
    - hash_table : ListNode 구조체를 가리키는 포인터의 배열로 되어 있음
    - 키가 버킷으로 들어오면 먼저 동적 메모리 할당을 이용해 연결 리스트의 노드를 생성한 다음, 이 새로운 노드에 키를 복사
